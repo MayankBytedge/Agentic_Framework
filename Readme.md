@@ -1,5 +1,5 @@
 
-## 🎯 **VC Pitch Features**
+
 
 ### **✅ Complete Agentic Framework**
 - **5 Specialized Agents**: Brake, Frame, Clutch, Tire, Engine
