@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BytEdge Automotive AI - Alternative Frontend</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #89CEF1 0%, #764ba2 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .chat-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        #queryInput {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        #queryInput::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .agent-card {
+            background: linear-gradient(145deg, #1e1e2e, #2a2a3e);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-8px);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .agent-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .status-active { background: linear-gradient(45deg, #4ade80, #22c55e); }
+        .status-development { background: linear-gradient(45deg, #f59e0b, #d97706); }
+        .status-coming-soon { background: linear-gradient(45deg, #6366f1, #8b5cf6); }
+        
+        .agent-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        
+        .agent-description {
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .response-area {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            display: none;
+        }
+        
+        .hidden { display: none; }
+        .visible { display: block; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>BytEdge Automotive AI</h1>
+        <p>Advanced Multi-Agent Conversational AI for Automotive Engineering</p>
+    </div>
+
+    <div class="container">
+        <div class="chat-container">
+            <h2>Conversational AI Interface</h2>
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="queryInput" 
+                    placeholder="Describe your automotive engineering challenge..."
+                >
+                <button class="btn" onclick="processQuery()">Analyze Query</button>
+            </div>
+            
+            <div id="responseArea" class="response-area">
+                <div id="aiResponse"></div>
+                <div id="suggestedAgents" class="agents-grid"></div>
+            </div>
+        </div>
+
+        <div class="agents-grid">
+            <div class="agent-card" data-agent="brake">
+                <div class="agent-status status-active">Active</div>
+                <div class="agent-title">Brake Agent</div>
+                <div class="agent-description">
+                    Advanced brake system engineering with FEA simulation, thermal analysis, and performance optimization
+                </div>
+                <button class="btn" onclick="launchAgent('brake')">Launch Brake Agent</button>
+            </div>
+
+            <div class="agent-card" data-agent="frame">
+                <div class="agent-status status-development">Development</div>
+                <div class="agent-title">Frame Agent</div>
+                <div class="agent-description">
+                    Structural analysis and optimization for vehicle chassis and frame components
+                </div>
+                <button class="btn" onclick="launchAgent('frame')">Preview Frame Agent</button>
+            </div>
+
+            <div class="agent-card" data-agent="clutch">
+                <div class="agent-status status-development">Development</div>
+                <div class="agent-title">Clutch Agent</div>
+                <div class="agent-description">
+                    Clutch system mechanics, torque analysis, and drivetrain optimization
+                </div>
+                <button class="btn" onclick="launchAgent('clutch')">Preview Clutch Agent</button>
+            </div>
+
+            <div class="agent-card" data-agent="tire">
+                <div class="agent-status status-coming-soon">Coming Soon</div>
+                <div class="agent-title">Tire Agent</div>
+                <div class="agent-description">
+                    Tire dynamics, contact mechanics, and traction optimization systems
+                </div>
+                <button class="btn" onclick="launchAgent('tire')">Coming Soon</button>
+            </div>
+
+            <div class="agent-card" data-agent="engine">
+                <div class="agent-status status-coming-soon">Coming Soon</div>
+                <div class="agent-title">Engine Agent</div>
+                <div class="agent-description">
+                    Engine performance analysis, combustion optimization, and efficiency modeling
+                </div>
+                <button class="btn" onclick="launchAgent('engine')">Coming Soon</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const agents = {
+            'brake': {
+                url: 'https://brakeagendtemo.streamlit.app/',
+                status: 'active',
+                keywords: ['brake', 'braking', 'disc', 'pad', 'stopping', 'friction']
+            },
+            'frame': {
+                url: null,
+                status: 'development', 
+                keywords: ['frame', 'chassis', 'structure', 'crash', 'safety']
+            },
+            'clutch': {
+                url: null,
+                status: 'development',
+                keywords: ['clutch', 'transmission', 'gear', 'torque']
+            },
+            'tire': {
+                url: null,
+                status: 'coming-soon',
+                keywords: ['tire', 'wheel', 'traction', 'grip', 'contact']
+            },
+            'engine': {
+                url: null,
+                status: 'coming-soon',
+                keywords: ['engine', 'motor', 'combustion', 'fuel', 'power']
+            }
+        };
+
+        function processQuery() {
+            const query = document.getElementById('queryInput').value.toLowerCase();
+            if (!query.trim()) return;
+
+            // Simple keyword matching
+            const suggestedAgents = [];
+            for (const [agentName, agentData] of Object.entries(agents)) {
+                const score = agentData.keywords.reduce((acc, keyword) => {
+                    return acc + (query.includes(keyword) ? 1 : 0);
+                }, 0);
+                
+                if (score > 0) {
+                    suggestedAgents.push({name: agentName, score});
+                }
+            }
+
+            // Sort by relevance
+            suggestedAgents.sort((a, b) => b.score - a.score);
+            
+            // Display response
+            const responseArea = document.getElementById('responseArea');
+            const aiResponse = document.getElementById('aiResponse');
+            const suggestedAgentsDiv = document.getElementById('suggestedAgents');
+
+            if (suggestedAgents.length > 0) {
+                aiResponse.innerHTML = `
+                    <h3>AI Analysis Complete</h3>
+                    <p>Based on your query about "${query}", I recommend engaging with the following specialist agents:</p>
+                    <p><strong>Primary Recommendation:</strong> ${suggestedAgents[0].name.charAt(0).toUpperCase() + suggestedAgents[0].name.slice(1)} Agent</p>
+                `;
+
+                suggestedAgentsDiv.innerHTML = suggestedAgents.slice(0, 3).map(agent => `
+                    <div class="agent-card">
+                        <div class="agent-status status-${agents[agent.name].status.replace('-', '_')}">
+                            ${agents[agent.name].status.replace('-', ' ').toUpperCase()}
+                        </div>
+                        <div class="agent-title">${agent.name.charAt(0).toUpperCase() + agent.name.slice(1)} Agent</div>
+                        <button class="btn" onclick="launchAgent('${agent.name}')">
+                            ${agents[agent.name].status === 'active' ? 'Launch' : 'Preview'} Agent
+                        </button>
+                    </div>
+                `).join('');
+            } else {
+                aiResponse.innerHTML = `
+                    <h3>AI Analysis Complete</h3>
+                    <p>I recommend starting with our <strong>Brake Agent</strong> for component analysis or exploring our complete agent portfolio below.</p>
+                `;
+                suggestedAgentsDiv.innerHTML = '';
+            }
+
+            responseArea.style.display = 'block';
+        }
+
+        function launchAgent(agentName) {
+            const agent = agents[agentName];
+            
+            if (agent.status === 'active' && agent.url) {
+                // Working redirect for active agents
+                window.open(agent.url, '_blank');
+            } else if (agent.status === 'development') {
+                alert(`${agentName.charAt(0).toUpperCase() + agentName.slice(1)} Agent is currently in development. Advanced capabilities coming soon!`);
+            } else {
+                alert(`${agentName.charAt(0).toUpperCase() + agentName.slice(1)} Agent is planned for future release. Stay tuned!`);
+            }
+        }
+
+        // Handle Enter key in input
+        document.getElementById('queryInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                processQuery();
+            }
+        });
+    </script>
+</body>
+</html>
