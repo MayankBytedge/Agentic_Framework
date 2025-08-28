@@ -16,3 +16,65 @@ scikit-learn>=1.3.0
 
 # Environment Management
 python-dotenv>=1.0.0
+
+
+# Core Streamlit and web framework
+streamlit>=1.28.0
+streamlit-components-v1>=1.0.0
+
+# Data processing and analysis
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Visualization libraries
+plotly>=5.15.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# CAD and 3D processing (with fallback options)
+aspose-cad>=23.12.0  # Primary CAD library
+pythreejs>=2.4.0     # Alternative 3D visualization
+trimesh>=3.23.0      # Mesh processing
+pygltflib>=1.16.0    # GLB/GLTF support
+
+# FEA and scientific computing
+pynite>=0.0.110      # Open source FEA library (alternative)
+# Note: For full FEA capabilities, consider:
+# - FEniCS (requires conda install)
+# - OpenFOAM Python bindings
+# - SciPy for basic structural analysis
+
+# File processing and conversion
+steputils>=0.1b0     # STEP file processing
+opencascade>=7.7.0   # Alternative CAD kernel (if available)
+
+# Report generation and export
+fpdf2>=2.7.0         # PDF generation
+reportlab>=4.0.0     # Alternative PDF library
+jinja2>=3.1.0        # Template engine for reports
+weasyprint>=60.0     # HTML to PDF conversion
+markdown>=3.4.0      # Markdown processing
+
+# Image processing and visualization
+pillow>=10.0.0       # Image processing
+opencv-python>=4.8.0 # Computer vision (optional)
+
+# 3D visualization components for Streamlit
+stpyvista>=0.0.5     # Alternative 3D viewer
+pyvista>=0.42.0      # 3D visualization toolkit
+
+# Utility libraries
+python-dateutil>=2.8.0
+pytz>=2023.3
+requests>=2.31.0
+beautifulsoup4>=4.12.0  # For web scraping if needed
+
+# Optional: Machine Learning for intelligent meshing
+scikit-learn>=1.3.0
+tensorflow>=2.13.0   # For AI-powered mesh optimization (optional)
+
+# Development and testing (optional)
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0

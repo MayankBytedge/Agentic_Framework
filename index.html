@@ -183,7 +183,7 @@
                 <div class="agent-description">
                     Advanced brake system engineering with FEA simulation, thermal analysis, and performance optimization
                 </div>
-                <button class="btn" onclick="launchAgent('brake')">Brake Agent</button>
+                <button class="btn" onclick="launchAgent('brake')">Launch Brake Agent</button>
             </div>
 
             <div class="agent-card" data-agent="frame">
@@ -192,7 +192,7 @@
                 <div class="agent-description">
                     Structural analysis and optimization for vehicle chassis and frame components
                 </div>
-                <button class="btn" onclick="launchAgent('frame')">Frame Agent</button>
+                <button class="btn" onclick="launchAgent('frame')">Preview Frame Agent</button>
             </div>
 
             <div class="agent-card" data-agent="clutch">
@@ -201,7 +201,7 @@
                 <div class="agent-description">
                     Clutch system mechanics, torque analysis, and drivetrain optimization
                 </div>
-                <button class="btn" onclick="launchAgent('clutch')">Clutch Agent</button>
+                <button class="btn" onclick="launchAgent('clutch')">Preview Clutch Agent</button>
             </div>
 
             <div class="agent-card" data-agent="tire">
@@ -210,16 +210,16 @@
                 <div class="agent-description">
                     Tire dynamics, contact mechanics, and traction optimization systems
                 </div>
-                <button class="btn" onclick="launchAgent('tire')">Tire Agent</button>
+                <button class="btn" onclick="launchAgent('tire')">Coming Soon</button>
             </div>
 
-            <div class="agent-card" data-agent="brake">
+            <div class="agent-card" data-agent="ev-battery">
                 <div class="agent-status status-active">Active</div>
                 <div class="agent-title">EV Battery Agent</div>
                 <div class="agent-description">
                     Advanced brake system engineering with FEA simulation, thermal analysis, and performance optimization
                 </div>
-                <button class="btn" onclick="launchAgent('brake')">EV Battery Agent</button>
+                <button class="btn" onclick="launchAgent('ev-battery')">EV Battery Agent</button>
             </div>
 
             <div class="agent-card" data-agent="engine">
@@ -269,23 +269,28 @@
                 keywords: ['brake', 'braking', 'disc', 'pad', 'stopping', 'friction']
             },
             'frame': {
-                url: null,
+                url: 'Agents/frame-edge.html',
                 status: 'active', 
                 keywords: ['frame', 'chassis', 'structure', 'crash', 'safety']
             },
             'clutch': {
-                url: null,
+                url: 'Agents/clutch-edge.html',
                 status: 'active',
                 keywords: ['clutch', 'transmission', 'gear', 'torque']
             },
             'tire': {
-                url: null,
+                url: 'Agents/tire-edge.html',
                 status: 'active',
                 keywords: ['tire', 'wheel', 'traction', 'grip', 'contact']
             },
+            'ev-battery': {
+                url: 'Agents/battery-edge.html',
+                status: 'active',
+                keywords: ['Battery', 'charging', 'power', 'drain', 'lithium', 'energy']
+            },
             'engine': {
                 url: null,
-                status: 'Devlopent',
+                status: 'coming-soon',
                 keywords: ['engine', 'motor', 'combustion', 'fuel', 'power']
             }
         };
